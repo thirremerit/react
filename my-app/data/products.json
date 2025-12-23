@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 79.99,
+    "stock": 25,
+    "image": "https://via.placeholder.com/150",
+    "description": "High quality wireless headphones."
+  },
+  {
+    "id": 2,
+    "name": "Smart Watch",
+    "category": "Electronics",
+    "price": 149.99,
+    "stock": 15,
+    "image": "https://via.placeholder.com/150",
+    "description": "Smart watch with fitness tracking."
+  },
+  {
+    "id": 3,
+    "name": "Running Shoes",
+    "category": "Sports",
+    "price": 59.99,
+    "stock": 40,
+    "image": "https://via.placeholder.com/150",
+    "description": "Comfortable running shoes."
+  },
+  {
+    "id": 4,
+    "name": "Backpack",
+    "category": "Accessories",
+    "price": 39.99,
+    "stock": 30,
+    "image": "https://via.placeholder.com/150",
+    "description": "Durable travel backpack."
+  },
+  {
+    "id": 5,
+    "name": "Gaming Mouse",
+    "category": "Electronics",
+    "price": 29.99,
+    "stock": 50,
+    "image": "https://via.placeholder.com/150",
+    "description": "RGB gaming mouse."
+  },
+  {
+    "id": 6,
+    "name": "Water Bottle",
+    "category": "Sports",
+    "price": 14.99,
+    "stock": 100,
+    "image": "https://via.placeholder.com/150",
+    "description": "Reusable water bottle."
+  },
+  {
+    "id": 7,
+    "name": "Notebook",
+    "category": "Stationery",
+    "price": 4.99,
+    "stock": 200,
+    "image": "https://via.placeholder.com/150",
+    "description": "Lined notebook."
+  },
+  {
+    "id": 8,
+    "name": "Desk Lamp",
+    "category": "Home",
+    "price": 24.99,
+    "stock": 18,
+    "image": "https://via.placeholder.com/150",
+    "description": "LED desk lamp."
+  }
+]
