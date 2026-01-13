@@ -1,0 +1,72 @@
+[
+{
+    "id": 1,
+    "name": "New York City",
+    "countryCode": "USA",
+    "population": 8419600,
+    "description": "New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean. At its core is Manhattan, a densely populated borough that’s among the world’s major commercial, financial and cultural centers."
+},
+{
+    "id": 2,
+    "name": "Los Angeles",
+    "countryCode": "USA",
+    "population": 3980400,
+    "description": "Los Angeles is a sprawling Southern California city and the center of the nation’s film and television industry. Near its iconic Hollywood sign, studios such as Paramount Pictures, Universal and Warner Brothers offer behind-the-scenes tours."
+},
+{
+    "id": 3,
+    "name": "Chicago",
+    "countryCode": "USA",
+    "population": 2716000,
+    "description": "Chicago, on Lake Michigan in Illinois, is among the largest cities in the U.S. Famed for its bold architecture, it has a skyline punctuated by skyscrapers such as the iconic John Hancock Center, 1,451-ft. Willis Tower (formerly the Sears Tower) and the neo-Gothic Tribune Tower."
+},
+{
+    "id": 4,
+    "name": "Houston",
+    "countryCode": "USA",
+    "population": 2328000,
+    "description": "Houston is a large metropolis in Texas, extending to Galveston Bay. It’s closely linked with the Space Center Houston, the coastal visitor center at NASA’s astronaut training and flight control complex. The city’s economy is based on energy, manufacturing, aeronautics and transportation."
+},
+{
+    "id": 5,
+    "name": "Phoenix",
+    "countryCode": "USA",
+    "population": 1690000,
+    "description": "Phoenix is the capital of the southwestern U.S. state of Arizona. Known for its year-round sun and warm temperatures, it’s a popular destination for golf, hiking and spa retreats. The city’s sprawling metropolitan area is known as the Valley of the Sun."
+},
+{
+    "id": 6,
+    "name": "Philadelphia",
+    "countryCode": "USA",
+    "population": 1584200,
+    "description": "Philadelphia, Pennsylvania’s largest city, is notable for its rich history, on display at the Liberty Bell, Independence Hall (where the Declaration of Independence and Constitution were signed) and other American Revolutionary sites."
+},
+{
+    "id": 7,
+    "name": "San Antonio",
+    "countryCode": "USA",
+    "population": 1547200,
+    "description": "San Antonio is a major city in south-central Texas with a rich colonial heritage. The Alamo, an 18th-century Spanish mission preserved as a museum, marks an infamous 1836 battle for Texan independence from Mexico."
+},
+{
+    "id": 8,
+    "name": "San Diego",
+    "countryCode": "USA",
+    "population": 1423800,
+    "description": "San Diego is a city on the Pacific coast of California known for its beaches, parks and warm climate. The city’s historic Old Town district reflects its early days as a Spanish colonial outpost and Mexican village."
+},
+{
+    "id": 9,
+    "name": "Dallas",
+    "countryCode": "USA",
+    "population": 1341000,
+    "description": "Dallas, a modern metropolis in north Texas, is a commercial and cultural hub of the region. It’s known for its historical importance in the oil and cotton industries and as a strong industrial and financial sector."
+},
+{
+    "id": 10,
+    "name": "San Jose",
+    "countryCode": "USA",
+    "population": 1035300,
+    "description": "San Jose is a large city surrounded by rolling hills in Silicon Valley, a major technology hub in California’s Bay Area. It’s known for its affluence, Mediterranean climate and high cost of living."
+}
+]
