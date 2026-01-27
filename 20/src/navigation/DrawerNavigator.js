@@ -5,7 +5,7 @@ import BottomTabNavigator from "./TabNavigator";
 import { AboutStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
-
+console.log("AboutStackNavigator:", AboutStackNavigator);
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator>

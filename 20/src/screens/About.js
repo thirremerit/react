@@ -1,23 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const About = ({ navigation }) => {
+const About = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>About Screen</Text>
-
+      <Text style={styles.text}>Welcome to About Screen</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate("Home")}
       >
-        <Text style={styles.buttonText}>GO BACK</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, styles.drawerButton]}
-        onPress={() => navigation.openDrawer()}
-      >
-        <Text style={styles.buttonText}>OPEN DRAWER</Text>
+        <Text style={styles.buttonText}>GO TO BACK TO HOME</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,22 +23,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f2f2f2",
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 30,
   },
   button: {
     backgroundColor: "#007AFF",
     paddingVertical: 12,
     paddingHorizontal: 30,
-    borderRadius: 8,
-    marginVertical: 10,
-  },
-  drawerButton: {
-    backgroundColor: "#34C759",
+    borderRadius: 5,
+    marginTop: 20,
   },
   buttonText: {
     color: "white",
