@@ -1,17 +1,9 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, ScrollView,TouchableOpacity } from 'react-native';
+import data from '../data/data.json';
+import Item from '../components/Item';
 
-import data from "../data/data.json";
-import Item from "../components/Item";
-
-class Ios extends React.Component {
+class Android extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -36,7 +28,7 @@ class Ios extends React.Component {
 
           <View style={styles.productsContainer}>
             <FlatList
-              data={this.state.product.ios}
+              data={this.state.product.android}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => <Item item={item} />}
             />
@@ -51,7 +43,9 @@ class Ios extends React.Component {
   }
 }
 
-export default Ios;
+
+
+export default Android;
 
 const styles = StyleSheet.create({
   container: {
@@ -74,3 +68,6 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
+
+
+

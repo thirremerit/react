@@ -3,7 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { MainStackNavigator, AboutStackNavigator } from "./StackNavigator";
-import IosStackNavigator from "./iosStackNavigator";
+import IosStackNavigator from "./IosStackNavigator";
+import AndroidStackNavigator from "./AndroidStackNavigator";
+import LaptopStackNavigator from "./LaptopStackNavigator";
+
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -23,6 +26,34 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
+        name="Ios"
+        component={IosStackNavigator}
+        options={{
+          tabBarLabel: "iOS",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="phone"
+              size={26}
+              color={color}
+            />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Android"
+        component={AndroidStackNavigator}
+        options={{
+          tabBarLabel: "Android",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="phone"
+              size={26}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Home"
         component={MainStackNavigator}
         options={{
@@ -30,20 +61,6 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="home"
-              color={color}
-              size={size ?? 26}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Ios"
-        component={IosStackNavigator}
-        options={{
-          tabBarLabel: "iOS",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="apple"
               color={color}
               size={size ?? 26}
             />
@@ -59,6 +76,20 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="video-stabilization"
+              color={color}
+              size={size ?? 26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Laptop"
+        component={LaptopStackNavigator}
+        options={{
+          tabBarLabel: "Laptops",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="laptop"
               color={color}
               size={size ?? 26}
             />

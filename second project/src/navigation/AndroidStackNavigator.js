@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Ios from "../screens/Ios";
+import Android from "../screens/Android";
 
 const Stack = createStackNavigator();
 
-const IosStackNavigator = () => {
+const AndroidStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="iOS"
-        component={Ios}
+        name="Android"
+        component={Android}
         options={{
           headerStyle: {
             backgroundColor: "#2f3b52",
@@ -21,4 +21,4 @@ const IosStackNavigator = () => {
   );
 };
 
-export default IosStackNavigator;
+export default AndroidStackNavigator;

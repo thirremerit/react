@@ -29,6 +29,4 @@ const AboutStackNavigator = () => {
   );
 };
 
-
-
 export { MainStackNavigator, AboutStackNavigator };

@@ -49,7 +49,58 @@
       "image": "https://images.unsplash.com/photo-1570963904764-fff96652bbd",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, quis nostrud exercitation."
     }
-    
-
+  ],
+    "android": [
+    {
+      "id": 1,
+      "name": "Xiaomi",
+      "category": "Android",
+      "price": "$990",
+      "image": "https://images.unsplash.com/photo-1575715715369-38aa1227786a",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, quis nostrud exercitation."
+    },
+    {
+      "id": 2,
+      "name": "Samsung S21",
+      "category": "Android",
+      "price": "$990",
+      "image": "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, quis nostrud exercitation."
+    }
+  ],
+  "laptops": [
+    {
+      "id": 1,
+      "name": "MacBook Pro 14",
+      "category": "Laptop",
+      "price": "$1999",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+      "description": "Powerful laptop with M1 Pro chip, 14-inch Liquid Retina XDR display, and exceptional performance for professionals."
+    },
+    {
+      "id": 2,
+      "name": "Dell XPS 13",
+      "category": "Laptop",
+      "price": "$999",
+      "image": "https://images.unsplash.com/photo-1588872657840-218e412ee8e4",
+      "description": "Ultra-thin and lightweight laptop with stunning InfinityEdge display, perfect for productivity and portability."
+    },
+    {
+      "id": 3,
+      "name": "Lenovo ThinkPad X1",
+      "category": "Laptop",
+      "price": "$1299",
+      "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46",
+      "description": "Premium business laptop with legendary keyboard, excellent battery life, and robust build quality."
+    },
+    {
+      "id": 4,
+      "name": "ASUS ROG Gaming",
+      "category": "Laptop",
+      "price": "$1599",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "description": "High-performance gaming laptop with RTX graphics, 144Hz display, and advanced cooling system."
+    }
   ]
+  
 }
