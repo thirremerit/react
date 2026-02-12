@@ -1,32 +1,29 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Home from "../screens/Home";
-import About from "../screens/About";
+import BottomTabNavigator from "./BottomTabNavigator";
+import Single1 from "../screens/Single1";
 
 const Stack = createStackNavigator();
 
-const screenOptionStyle = {
-  headerStyle: {
-    backgroundColor: "#2C3E50",
-  },
-  headerTintColor: "#00BCD4",
-};
+
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={Home} />
+    <Stack.Navigator >
+      <Stack.Screen
+       name="Home"
+      component={BottomTabNavigator}
+      options={{headerShown:false}}
+      />
+      <Stack.Screen
+       name="Single1"
+      component={Single1}
+      options={{title:"Details"}}
+      />
     </Stack.Navigator>
   );
 };
 
-const AboutStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="About" component={About} />
-    </Stack.Navigator>
-  );
-};
 
-export { MainStackNavigator, AboutStackNavigator };
+export default MainStackNavigator;

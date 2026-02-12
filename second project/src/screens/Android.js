@@ -1,7 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView,TouchableOpacity } from 'react-native';
-import data from '../data/data.json';
-import Item from '../components/Item';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+
+import data from "../data/data.json";
+import Item from "../components/Item";
 
 class Android extends React.Component {
   constructor() {
@@ -43,8 +51,6 @@ class Android extends React.Component {
   }
 }
 
-
-
 export default Android;
 
 const styles = StyleSheet.create({
@@ -68,6 +74,3 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
-
-
-

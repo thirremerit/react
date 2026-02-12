@@ -1,8 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const Item = ({ item }) => {
+  const navigation = useNavigation();
   return (
+
+    <TouchableOpacity
+    activeOpacity={0.8}
+    onPress={() => navigation.navigate("Single1", { item })}
+    >
     <View style={styles.cardContainer}>
       <Image source={{ uri: item.image }} style={styles.img} />
 
@@ -13,6 +20,7 @@ const Item = ({ item }) => {
         <Text style={styles.price}>{item.price}</Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 
