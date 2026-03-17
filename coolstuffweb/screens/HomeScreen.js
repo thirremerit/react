@@ -1,26 +1,137 @@
-import React from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+﻿import React, { useState } from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { categories } from "../data/places";
-import { styles } from "../styles";
+import { categories, places } from "../data/places";
+import { styles, colors } from "../styles";
+
+const featuredPlaces = places.slice(0, 4);
 
 export default function HomeScreen({ navigation }) {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  
+
+  const handleCategoryPress = (category) => {
+    setSelectedCategory(category ?? "All");
+    navigation.navigate("Places", { category });
+  };
+
+  const handleViewAll = () => navigation.navigate("Places");
+
+  const renderFeatured = ({ item }) => (
+    <TouchableOpacity
+      style={styles.listItem}
+      onPress={() => navigation.navigate("Details", { place: item })}
+    >
+      <Image source={{ uri: item.image }} style={styles.listItemImage} />
+      <View style={styles.listItemBody}>
+        <Text style={styles.listItemTitle}>{item.title}</Text>
+        <Text numberOfLines={2} style={styles.listItemSub}>
+          {item.description}
+        </Text>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{item.category}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Explore Pristina</Text>
-      <Text style={styles.subtitle}>Discover the best places in Kosovo's capital</Text>
-      <View style={styles.categoryContainer}>
-        {categories.map((item) => (
-          <TouchableOpacity key={item.id} style={styles.categoryButton} onPress={() => navigation.navigate("Places", { category: item.name })}>
-            <Ionicons name={item.icon} size={20} color="#334155" style={{ marginRight: 8 }} />
-            <Text style={styles.categoryText}>{item.name}</Text>
+ 
+
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
+      <ScrollView contentContainerStyle={[styles.scrollContent, { backgroundColor: colors.background }]} showsVerticalScrollIndicator={false}>
+        <View style={styles.hero}>
+          <Image
+            source={{ uri: "https://picsum.photos/900/600?grayscale" }}
+            style={styles.heroImage}
+          />
+          <View style={styles.heroOverlay} />
+          <View style={{ flex: 1, justifyContent: "center", padding: 22 }}>
+            <Text style={styles.heroText}>Discover Pristina</Text>
+            <Text style={styles.heroSub}>
+              Find curated experiences, top landmarks, and cultural hotspots in Kosovo’s capital.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Categories</Text>
+          <TouchableOpacity onPress={handleViewAll}>
+            <Text style={styles.sectionAction}>See all</Text>
           </TouchableOpacity>
-        ))}
-      </View>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Places")}>
-        <Text style={styles.buttonText}>See All Places</Text>
-      </TouchableOpacity>
-    </View>
+        </View>
+
+        <View style={styles.chipContainer}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.chipList}
+          >
+            <TouchableOpacity
+              style={[styles.chip, selectedCategory === "All" && styles.chipActive]}
+              onPress={() => handleCategoryPress(null)}
+            >
+              <Ionicons
+                name="grid-outline"
+                size={16}
+                color="rgba(255,255,255,0.92)"
+                style={{ marginRight: 8 }}
+              />
+              <Text style={styles.chipText}>All</Text>
+            </TouchableOpacity>
+
+            {categories.map((item) => {
+              const selected = selectedCategory === item.name;
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  style={[styles.chip, selected && styles.chipActive]}
+                  onPress={() => handleCategoryPress(item.name)}
+                >
+                  <Ionicons
+                    name={item.icon}
+                    size={16}
+                    color="rgba(255,255,255,0.92)"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.chipText}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </View>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Featured places</Text>
+          <TouchableOpacity onPress={handleViewAll}>
+            <Text style={styles.sectionAction}>View all</Text>
+          </TouchableOpacity>
+        </View>
+
+        <FlatList
+          data={featuredPlaces}
+          keyExtractor={(item) => item.id}
+          renderItem={renderFeatured}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20, alignItems: "center" }}
+        />
+
+        <TouchableOpacity style={styles.primaryButton} onPress={handleViewAll}>
+          <Text style={styles.primaryButtonText}>Browse all places</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
+  
 }
