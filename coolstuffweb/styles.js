@@ -38,11 +38,10 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   scrollContent: {
-    flex: 1,
     width: "100%",
     padding: 20,
     paddingTop: 16,
-    alignItems: "stretch",
+    alignItems: "center",
   },
   hero: {
     borderRadius: 24,
@@ -67,12 +66,14 @@ export const styles = StyleSheet.create({
     fontWeight: "800",
     marginBottom: 8,
     letterSpacing: 0.5,
+    textAlign: "center",
   },
   heroSub: {
     color: colors.textSecondary,
     fontSize: 16,
     lineHeight: 22,
     maxWidth: "80%",
+    textAlign: "center",
   },
   sectionHeader: {
     flexDirection: "column",
@@ -93,9 +94,11 @@ export const styles = StyleSheet.create({
   },
   chipContainer: {
     marginBottom: 20,
+    width: "100%",
   },
   chipList: {
     flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 4,
   },
   chip: {

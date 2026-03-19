@@ -1,5 +1,6 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import {
+  Animated,
   SafeAreaView,
   ScrollView,
   ImageBackground,
@@ -12,11 +13,21 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { categories, places } from "../data/places";
 import { styles, colors } from "../styles";
+import { useAuth } from "../AuthContext";
 
 const featuredPlaces = places.slice(0, 4);
 
 export default function HomeScreen({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+    }).start();
+  }, [opacity]);
 
   
 
@@ -45,18 +56,41 @@ export default function HomeScreen({ navigation }) {
     </TouchableOpacity>
   );
 
-  return (
- 
+  const { user, signOut } = useAuth();
 
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={[styles.scrollContent, { backgroundColor: colors.background }]} showsVerticalScrollIndicator={false}>
+  return (
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}> 
+      <Animated.ScrollView
+        style={{ opacity }}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { backgroundColor: colors.background, paddingBottom: 90 },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
+        <View
+          style={{
+            width: "100%",
+            maxWidth: 360,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 14,
+          }}
+        >
+          <Text style={{ color: colors.textSecondary }}>Hi, {user?.email}</Text>
+          <TouchableOpacity onPress={signOut}>
+            <Text style={styles.sectionAction}>Sign out</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.hero}>
           <Image
             source={{ uri: "https://picsum.photos/900/600?grayscale" }}
             style={styles.heroImage}
           />
           <View style={styles.heroOverlay} />
-          <View style={{ flex: 1, justifyContent: "center", padding: 22 }}>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 22 }}>
             <Text style={styles.heroText}>Discover Pristina</Text>
             <Text style={styles.heroSub}>
               Find curated experiences, top landmarks, and cultural hotspots in Kosovo’s capital.
@@ -75,7 +109,10 @@ export default function HomeScreen({ navigation }) {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.chipList}
+            contentContainerStyle={[
+              styles.chipList,
+              { justifyContent: "center", flexGrow: 1, paddingHorizontal: 10 },
+            ]}
           >
             <TouchableOpacity
               style={[styles.chip, selectedCategory === "All" && styles.chipActive]}
@@ -124,14 +161,25 @@ export default function HomeScreen({ navigation }) {
           renderItem={renderFeatured}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 20, alignItems: "center" }}
+          contentContainerStyle={{
+            paddingBottom: 20,
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
         />
 
         <TouchableOpacity style={styles.primaryButton} onPress={handleViewAll}>
           <Text style={styles.primaryButtonText}>Browse all places</Text>
         </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+
+        <TouchableOpacity
+          style={[styles.primaryButton, { backgroundColor: colors.accent, marginTop: 12 }]}
+          onPress={() => navigation.navigate("Favorites")}
+        >
+          <Text style={styles.primaryButtonText}>View favorites</Text>
+        </TouchableOpacity>
+      </Animated.ScrollView>
+    <safeAreaView>
   );
   
 }

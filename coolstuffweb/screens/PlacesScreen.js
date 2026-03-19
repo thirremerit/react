@@ -1,5 +1,6 @@
-﻿import React, { useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Animated,
   SafeAreaView,
   View,
   Text,
@@ -15,6 +16,15 @@ import { styles } from "../styles";
 export default function PlacesScreen({ route, navigation }) {
   const { category } = route.params || {};
   const [search, setSearch] = useState("");
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+    }).start();
+  }, [opacity]);
 
   const filteredPlaces = useMemo(() => {
     const base = category ? places.filter((p) => p.category === category) : places;
@@ -59,7 +69,7 @@ export default function PlacesScreen({ route, navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.scrollContent}>
+      <Animated.View style={[styles.scrollContent, { flex: 1, opacity }]}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>{category || "All places"}</Text>
           <Text style={styles.sectionAction}>{filteredPlaces.length} items</Text>
