@@ -3,11 +3,10 @@ import {
   Animated,
   SafeAreaView,
   ScrollView,
-  ImageBackground,
+  Image,
   View,
   Text,
   TouchableOpacity,
-  Image,
   FlatList,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,6 +19,7 @@ const featuredPlaces = places.slice(0, 4);
 export default function HomeScreen({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const opacity = useRef(new Animated.Value(0)).current;
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     Animated.timing(opacity, {
@@ -27,9 +27,7 @@ export default function HomeScreen({ navigation }) {
       duration: 400,
       useNativeDriver: true,
     }).start();
-  }, [opacity]);
-
-  
+  }, []); // removed opacity from dependencies
 
   const handleCategoryPress = (category) => {
     setSelectedCategory(category ?? "All");
@@ -56,18 +54,14 @@ export default function HomeScreen({ navigation }) {
     </TouchableOpacity>
   );
 
-  const { user, signOut } = useAuth();
-
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}> 
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <Animated.ScrollView
         style={{ opacity }}
-        contentContainerStyle={[
-          styles.scrollContent,
-          { backgroundColor: colors.background, paddingBottom: 90 },
-        ]}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: 90 }]}
         showsVerticalScrollIndicator={false}
       >
+        {/* Header */}
         <View
           style={{
             width: "100%",
@@ -78,19 +72,24 @@ export default function HomeScreen({ navigation }) {
             marginBottom: 14,
           }}
         >
-          <Text style={{ color: colors.textSecondary }}>Hi, {user?.email}</Text>
+          <Text style={{ color: colors.textSecondary }}>
+            Hi, {user?.email || "Guest"}
+          </Text>
           <TouchableOpacity onPress={signOut}>
             <Text style={styles.sectionAction}>Sign out</Text>
           </TouchableOpacity>
         </View>
 
+        {/* Hero */}
         <View style={styles.hero}>
           <Image
             source={{ uri: "https://picsum.photos/900/600?grayscale" }}
             style={styles.heroImage}
           />
           <View style={styles.heroOverlay} />
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 22 }}>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 22 }}
+          >
             <Text style={styles.heroText}>Discover Pristina</Text>
             <Text style={styles.heroSub}>
               Find curated experiences, top landmarks, and cultural hotspots in Kosovo’s capital.
@@ -98,6 +97,7 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
 
+        {/* Categories */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Categories</Text>
           <TouchableOpacity onPress={handleViewAll}>
@@ -105,49 +105,40 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.chipContainer}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={[
-              styles.chipList,
-              { justifyContent: "center", flexGrow: 1, paddingHorizontal: 10 },
-            ]}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={[styles.chipList, { paddingHorizontal: 10 }]}
+        >
+          <TouchableOpacity
+            style={[styles.chip, selectedCategory === "All" && styles.chipActive]}
+            onPress={() => handleCategoryPress(null)}
           >
-            <TouchableOpacity
-              style={[styles.chip, selectedCategory === "All" && styles.chipActive]}
-              onPress={() => handleCategoryPress(null)}
-            >
-              <Ionicons
-                name="grid-outline"
-                size={16}
-                color="rgba(255,255,255,0.92)"
-                style={{ marginRight: 8 }}
-              />
-              <Text style={styles.chipText}>All</Text>
-            </TouchableOpacity>
+            <Ionicons name="grid-outline" size={16} color="rgba(255,255,255,0.92)" style={{ marginRight: 8 }} />
+            <Text style={styles.chipText}>All</Text>
+          </TouchableOpacity>
 
-            {categories.map((item) => {
-              const selected = selectedCategory === item.name;
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={[styles.chip, selected && styles.chipActive]}
-                  onPress={() => handleCategoryPress(item.name)}
-                >
-                  <Ionicons
-                    name={item.icon}
-                    size={16}
-                    color="rgba(255,255,255,0.92)"
-                    style={{ marginRight: 8 }}
-                  />
-                  <Text style={styles.chipText}>{item.name}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        </View>
+          {categories.map((item) => {
+            const selected = selectedCategory === item.name;
+            return (
+              <TouchableOpacity
+                key={item.id}
+                style={[styles.chip, selected && styles.chipActive]}
+                onPress={() => handleCategoryPress(item.name)}
+              >
+                <Ionicons
+                  name={item.icon}
+                  size={16}
+                  color="rgba(255,255,255,0.92)"
+                  style={{ marginRight: 8 }}
+                />
+                <Text style={styles.chipText}>{item.name}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
 
+        {/* Featured Places */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Featured places</Text>
           <TouchableOpacity onPress={handleViewAll}>
@@ -161,13 +152,10 @@ export default function HomeScreen({ navigation }) {
           renderItem={renderFeatured}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: 20,
-            alignItems: "center",
-            paddingHorizontal: 20,
-          }}
+          contentContainerStyle={{ paddingBottom: 20, alignItems: "center", paddingHorizontal: 20 }}
         />
 
+        {/* Buttons */}
         <TouchableOpacity style={styles.primaryButton} onPress={handleViewAll}>
           <Text style={styles.primaryButtonText}>Browse all places</Text>
         </TouchableOpacity>
@@ -179,7 +167,6 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.primaryButtonText}>View favorites</Text>
         </TouchableOpacity>
       </Animated.ScrollView>
-    <safeAreaView>
+    </SafeAreaView>
   );
-  
 }

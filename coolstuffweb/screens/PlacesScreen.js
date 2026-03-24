@@ -16,6 +16,7 @@ import { styles } from "../styles";
 export default function PlacesScreen({ route, navigation }) {
   const { category } = route.params || {};
   const [search, setSearch] = useState("");
+
   const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -24,13 +25,17 @@ export default function PlacesScreen({ route, navigation }) {
       duration: 400,
       useNativeDriver: true,
     }).start();
-  }, [opacity]);
+  }, []);
 
   const filteredPlaces = useMemo(() => {
-    const base = category ? places.filter((p) => p.category === category) : places;
+    const base = category
+      ? places.filter((p) => p.category === category)
+      : places;
+
     if (!search) return base;
 
     const lower = search.toLowerCase();
+
     return base.filter(
       (p) =>
         p.title.toLowerCase().includes(lower) ||
@@ -45,11 +50,14 @@ export default function PlacesScreen({ route, navigation }) {
       onPress={() => navigation.navigate("Details", { place: item })}
     >
       <Image source={{ uri: item.image }} style={styles.listItemImage} />
+
       <View style={styles.listItemBody}>
         <Text style={styles.listItemTitle}>{item.title}</Text>
+
         <Text style={styles.listItemSub} numberOfLines={2}>
           {item.description}
         </Text>
+
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{item.category}</Text>
         </View>
@@ -59,22 +67,29 @@ export default function PlacesScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.backButton}>
-        <TouchableOpacity
-          style={{ flexDirection: "row", alignItems: "center" }}
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons name="arrow-back" size={22} color="#FFF" />
-          <Text style={styles.backText}>Back</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Animated.View style={[styles.scrollContent, { flex: 1, opacity }]}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>{category || "All places"}</Text>
-          <Text style={styles.sectionAction}>{filteredPlaces.length} items</Text>
+      <Animated.View style={{ flex: 1, opacity }}>
+        {/* Back Button */}
+        <View style={styles.backButton}>
+          <TouchableOpacity
+            style={{ flexDirection: "row", alignItems: "center" }}
+            onPress={() => navigation.goBack()}
+          >
+            <Ionicons name="arrow-back" size={22} color="#FFF" />
+            <Text style={styles.backText}>Back</Text>
+          </TouchableOpacity>
         </View>
 
+        {/* Header */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>
+            {category || "All places"}
+          </Text>
+          <Text style={styles.sectionAction}>
+            {filteredPlaces.length} items
+          </Text>
+        </View>
+
+        {/* Search Bar */}
         <View
           style={{
             flexDirection: "row",
@@ -86,25 +101,38 @@ export default function PlacesScreen({ route, navigation }) {
             marginBottom: 18,
           }}
         >
-          <Ionicons name="search" size={18} color="rgba(255,255,255,0.72)" />
+          <Ionicons
+            name="search"
+            size={18}
+            color="rgba(255,255,255,0.72)"
+          />
           <TextInput
             value={search}
             onChangeText={setSearch}
             placeholder="Search places"
             placeholderTextColor="rgba(255,255,255,0.7)"
-            style={{ flex: 1, marginLeft: 10, color: "#FFF", fontSize: 15 }}
+            style={{
+              flex: 1,
+              marginLeft: 10,
+              color: "#FFF",
+              fontSize: 15,
+            }}
           />
         </View>
 
+        {/* List */}
         <FlatList
           style={{ flex: 1, width: "100%" }}
           data={filteredPlaces}
           keyExtractor={(item) => item.id}
           renderItem={renderPlace}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 80, alignItems: "center" }}
+          contentContainerStyle={{
+            paddingBottom: 80,
+            alignItems: "center",
+          }}
         />
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 }
